@@ -8,10 +8,6 @@
 #'
 #' @param hc.cutoff the height to cut hierarchical clustering tree
 #'
-#' @param hc.method the method for hierarchical clustering
-#'
-#' @param hc 'agglomerative' or 'divisive'. For testing purpose now.
-
 #' @return A list with the elements \describe{
 #' \item{components}{Clusters profile as a data frame.Rows represent the categories and columns are index.
 #'                each cell contains number of items}
@@ -41,9 +37,8 @@
 
 extract_components_from_clusters <-  function(x,
                                               cos.merge = 0.90,
-                                              hc.cutoff = 0.12,
-                                              hc.method = "average",
-                                              hc = "agglomerative"
+                                              hc.cutoff = 0.12
+
 ){
   if (class(x)=="hdpSampleChain") {
     message('Extracting components on single chain.A hdpSampleMulti object is recommended, see ?hdp_multi_chain')
@@ -246,14 +241,10 @@ extract_components_from_clusters <-  function(x,
   cosine.dist.df <- parallelDist::parallelDist(t(dataframe.normed),method = "cosine")
 
 
-  if(hc == "agglomerative"){
-    print(paste0("Performing ",hc, " hierarchical clustering"))
-    cosine.dist.hctree <- stats::hclust(cosine.dist.df,method = hc.method)
-  }else if(hc == "divisive"){
-    print(paste0("Performing ",hc, " hierarchical clustering"))
-    cosine.dist.hctree.diana <- cluster::diana(x = cosine.dist.df,diss = T)
-    cosine.dist.hctree <- as.hclust(cosine.dist.hctree.diana)
-  }
+
+  print(paste0("Performing divisive hierarchical clustering"))
+  cosine.dist.hctree.diana <- cluster::diana(x = cosine.dist.df,diss = T)
+  cosine.dist.hctree <- as.hclust(cosine.dist.hctree.diana)
 
 
   # Find clusters composed of highly similar clusters

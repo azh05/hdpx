@@ -5,7 +5,7 @@ test_that("simple test of stirling numbers", {
   expect_equal(sfn(0), 1, chec.attributes = FALSE)
 })
 
-test_that("stirling numbers; have trailin vector of zeros", {
+test_that("stirling numbers; have trailing vector of zeros", {
   sfn <- xmake.s()
   foo <- sfn(200)
   expect_equal(min(which(foo == 0)), 186)

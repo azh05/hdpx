@@ -107,8 +107,9 @@ extract_components_from_clusters <-  function(x,
   }
 
   ########################################################################
-  #######merge clusters with high cos.sim in one posterior sample#########
-  ########################################################################
+  # Merge essentially identical clusters (cosine similarity > 0.99)
+  # within 1 posterior Gibbs sample.
+
   first_merge <- function(ccc,cdc){
     if(is.vector(ccc)){
       return(list(ccc=ccc,cdc=cdc))
@@ -142,8 +143,8 @@ extract_components_from_clusters <-  function(x,
   }
 
   ########################################################################
-  #######merge clusters with high cos.sim in one posterior chain##########
-  ########################################################################
+  # Merge nearly identical clusters in one posterior chain.
+  # This will speed up subsequent hierarchical clustering.
 
   cosmergechain <- function(ccc,cdc){
 
@@ -152,6 +153,8 @@ extract_components_from_clusters <-  function(x,
 
     colnames(ccc) <- colnames(cdc) <- clust_label
 
+    # These are really essentially identical
+    # cosine similarity > 0.99
     clust_same <- (clust_cos > 0.99 & lower.tri(clust_cos))
     same <- which(clust_same, arr.ind=TRUE) # merge these columns
     if (length(same)>0){
@@ -195,6 +198,7 @@ extract_components_from_clusters <-  function(x,
   stats.dataframe <- data.frame(matrix(nrow=0,ncol=2))
   dp.dataframe <- each.chain.noise.cdc <- data.frame(matrix(nrow=ndp,ncol=0))
 
+  # Combine CDC across all Gibbs samples
   for(i in 1:nch){
     dataframe <- cbind(dataframe,summary[[i]]$spectrum)
     dp.dataframe <- cbind(dp.dataframe,summary[[i]]$spectrum_cdc)
@@ -206,13 +210,14 @@ extract_components_from_clusters <-  function(x,
 
   }
 
-
-
   clust_cos <- cosCpp(as.matrix(dataframe))
   clust_label <- c(1:ncol(dataframe))
   colnames(dataframe) <- c(1:ncol(dataframe))
   colnames(dp.dataframe) <- c(1:ncol(dataframe))
   clust_same <- (clust_cos > 0.97 & lower.tri(clust_cos))
+
+  # Again merge more-or-less identical clusters, with the aim of
+  # speeding up the hierarchical clustering later
   same <- which(clust_same, arr.ind=TRUE) # merge these columns
 
   while(length(same)>0){

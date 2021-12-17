@@ -6,3 +6,4 @@ src/*.so
 src/*.dll
 hdp.Rproj
 R/rpm
+sample.chain.1000124.Rdata

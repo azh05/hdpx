@@ -178,15 +178,18 @@ plot_component_posterior_samples <- function(components,
   for(i in 1:ncol(components)){
     chain <- exposures <- sequence <- NULL
     summary.cluster <- retval[[i]][["summary.chain.info"]]
-    colnames(summary.cluster) <- c("chain","sample","sequence","exposures")
+    colnames(summary.cluster) <- c("seq","chain","sample","exposures")
     cluster.name <- colnames(components)[i]
-    plot.1 <- ggplot2::ggplot(data=summary.cluster, ggplot2::aes(x=sequence, y=sample, group=chain,color=chain)) +
-      ggplot2::geom_point()+ggplot2::ggtitle(paste0(cluster.name," in Gibbs sample")) + ggplot2::xlab("Posterior.Sample") +  ggplot2::ylab("Chain")
+    summary.cluster <- summary.cluster[summary.cluster$chain>0,]
+    summary.cluster$chain <- as.factor(summary.cluster$chain)
+    plot.1 <- ggplot2::ggplot(data=summary.cluster, ggplot2::aes(x=sample, y=chain, group=chain)) +
+      ggplot2::geom_point(size=0.8)+ggplot2::ggtitle(paste0("Posterior samples with raw clusters of ",cluster.name)) + ggplot2::xlab("Posterior Sample") +  ggplot2::ylab("Chain")
     plot(plot.1)
 
-    plot.2 <- ggplot2::ggplot(data=summary.cluster, ggplot2::aes(x=sequence, y=exposures, group=chain,color=chain)) +
-      ggplot2::geom_point()+ggplot2::ggtitle(paste0("exposures of ",cluster.name," in Gibbs sample"))+ ggplot2::xlab("Posterior.Sample") +  ggplot2::ylab("Exposure")
-    plot(plot.2)
+    ##I removed this before submit the paper, because this is not informative.
+   # plot.2 <- ggplot2::ggplot(data=summary.cluster, ggplot2::aes(x=sequence, y=exposures, group=chain,color=chain)) +
+  #    ggplot2::geom_point()+ggplot2::ggtitle(paste0("exposures of ",cluster.name," in Gibbs sample"))+ ggplot2::xlab("Posterior.Sample") +  ggplot2::ylab("Exposure")
+    #plot(plot.2)
   }
 }
 

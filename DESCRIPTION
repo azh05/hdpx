@@ -86,7 +86,7 @@ Collate:
     'hdp_setdata.R'
     'interpret_components.R'
     'iterate.R'
-    'new_plot_functions.R'
+    'new_diagnostic_plot_functions.R'
     'plot_chain.R'
     'plot_components.R'
     'RcppExports.R'

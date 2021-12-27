@@ -86,8 +86,8 @@ interpret_components <- function(multi.chains.retval,
   #than confidence.prop samples are selected as components with
   #moderate confidence
   moderate_confidence_components <- components_category_counts[,intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp)))]
-  moderate_components_post_number <- components_post_number[intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp))),]
-  moderate_components_cdc <- components_cdc[,intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp)))]
+  moderate_confidence_components_post_number <- components_post_number[intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp))),]
+  moderate_confidence_components_cdc <- components_cdc[,intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp)))]
 
   #the components with less than moderate.confidence.prop nsamples
   #are selected as low confidence components

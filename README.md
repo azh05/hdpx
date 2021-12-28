@@ -10,19 +10,21 @@ remotes::install_github(repo = "steverozen/hdpx", ref = "master", build_vignette
 ```
 
 Model categorical count data with a hierarchical Dirichlet
-    Process. Includes functions to initialise a HDP with a custom tree
+    Process. Includes functions to initialize a HDP with a custom tree
     structure, perform Gibbs sampling of the posterior distribution,
     and analyse the output. The underlying mathematical theory is
-    described by Teh et al. (Hierarchical Dirichlet Processes,
-    Journal of the American Statistical Association, 2006, 101:476). This
-    R package is based on code forked from Nicola Roberts, 
-    https://github.com/nicolaroberts/hdpwho. Roberts adapted the R code
-    from open source MATLAB and incorporated C code from Yee Whye Teh 
-    (MATLAB and C code available at
-    http://www.stats.ox.ac.uk/~teh/research/npbayes/npbayes-r21.tgz).
-    Teh and colleagues' publication is https://doi.org/10.1198/016214506000000302,
+    described by Teh et al. 
     "Hierarchical Dirichlet Processes", Journal of the American Statistical
-    Association 2006;101(476):1566-1581. Robert's thesis is at
+    Association 2006;101(476):1566-1581
+    (https://doi.org/10.1198/016214506000000302).
+
+This R package is based on code forked from Nicola Roberts, 
+    https://github.com/nicolaroberts/hdp. Roberts adapted the R code
+    from Teh and colleagues' open source MATLAB code
+    and incorporated Teh's C code, as does this package.
+    THe MATLAB and C code are available at
+    http://www.stats.ox.ac.uk/~teh/research/npbayes/npbayes-r21.tgz.
+    Robert's thesis is at
     https://www.repository.cam.ac.uk/bitstream/handle/1810/275454/Roberts-2018-PhD.pdf
     
 Subsequent changes by Rozen and Liu are confined to the R code.

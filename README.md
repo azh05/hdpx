@@ -4,9 +4,9 @@ R pkg for Hierarchical Dirichlet Process
 [![Build Status](https://travis-ci.com/steverozen/hdpx.svg?branch=master)](https://travis-ci.com/steverozen/hdpx)
 
 To install, first ensure `remotes` package is installed and the BioConductor repositories are available (run `setRepositories()`). 
-It might take a few minutes to download any missing dependencies and build the vignettes. 
+It might take a few minutes to download any missing dependencies. 
 ```R
-remotes::install_github(repo = "steverozen/hdpx", ref = "master", build_vignettes = FALSE)
+remotes::install_github(repo = "steverozen/hdpx", ref = "master")
 ```
 
 Model categorical count data with a hierarchical Dirichlet

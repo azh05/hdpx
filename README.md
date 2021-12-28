@@ -21,11 +21,10 @@ Model categorical count data with a hierarchical Dirichlet
 This R package is based on code forked from Nicola Roberts, 
     https://github.com/nicolaroberts/hdp. Roberts adapted the R code
     from Teh and colleagues' open source MATLAB code
-    and incorporated Teh's C code, as does this package.
-    THe MATLAB and C code are available at
-    http://www.stats.ox.ac.uk/~teh/research/npbayes/npbayes-r21.tgz.
+    and incorporated Teh's C code, as does this package (please see
+    details below).
     Robert's thesis is at
-    https://www.repository.cam.ac.uk/bitstream/handle/1810/275454/Roberts-2018-PhD.pdf
+    https://www.repository.cam.ac.uk/bitstream/handle/1810/275454/Roberts-2018-PhD.pdf.
     
 Subsequent changes by Rozen and Liu are confined to the R code.
     These include

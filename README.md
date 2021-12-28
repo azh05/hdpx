@@ -16,10 +16,10 @@ Model categorical count data with a hierarchical Dirichlet
     described by Teh et al. (Hierarchical Dirichlet Processes,
     Journal of the American Statistical Association, 2006, 101:476). This
     R package is based on code forked from Nicola Roberts, 
-    https://github.com/nicolaroberts/hdpwho. Roberts adapted this code
-    from open source MATLAB and C code written by Yee Whye Teh and 
-    available here
-    http://www.stats.ox.ac.uk/~teh/research/npbayes/npbayes-r21.tgz.
+    https://github.com/nicolaroberts/hdpwho. Roberts adapted the R code
+    from open source MATLAB and incorporated C code from Yee Whye Teh 
+    (MATLAB and C code available at
+    http://www.stats.ox.ac.uk/~teh/research/npbayes/npbayes-r21.tgz).
     Subsequent changes by Rozen and Liu are confined to the R code.
     These include
     

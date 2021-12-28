@@ -20,7 +20,7 @@ Model categorical count data with a hierarchical Dirichlet
     from open source MATLAB and incorporated C code from Yee Whye Teh 
     (MATLAB and C code available at
     http://www.stats.ox.ac.uk/~teh/research/npbayes/npbayes-r21.tgz).
-    Teh and colleagues publication is https://doi.org/10.1198/016214506000000302,
+    Teh and colleagues' publication is https://doi.org/10.1198/016214506000000302,
     "Hierarchical Dirichlet Processes", Journal of the American Statistical
     Association 2006;101(476):1566-1581. Robert's thesis is at
     https://www.repository.cam.ac.uk/bitstream/handle/1810/275454/Roberts-2018-PhD.pdf

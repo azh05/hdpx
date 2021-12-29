@@ -249,7 +249,7 @@ extract_components_from_clusters <-  function(x,
 
   print(paste0("Performing divisive hierarchical clustering"))
   cosine.dist.hctree.diana <- cluster::diana(x = cosine.dist.df,diss = T)
-  cosine.dist.hctree <- as.hclust(cosine.dist.hctree.diana)
+  cosine.dist.hctree <- stats::as.hclust(cosine.dist.hctree.diana)
 
 
   # Find clusters composed of highly similar clusters

@@ -26,6 +26,10 @@ This R package is based on code forked from Nicola Roberts,
     Robert's thesis is at
     https://www.repository.cam.ac.uk/bitstream/handle/1810/275454/Roberts-2018-PhD.pdf.
     
+If you want to use this package for mutational signature discovery,
+you probably want to start with https://github.com/steverozen/mSigHdp,
+which calls this package.
+    
 Subsequent changes by Rozen and Liu are confined to the R code.
     These include
     

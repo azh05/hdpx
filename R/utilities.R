@@ -46,16 +46,6 @@ qq_addclass <- function(hdp,newclass){
 # func to randomly assign a number of tables
 randnumtable <- function(weights,maxtable){
 
-  # cat("rnt:", paste(maxtable, collapse = " "), "\n", sep = "")
-  # if (exists("stir.closure")) {
-    # cat("Using new function stir.closure\n")
-    sfn <- stir.closure
-  # } else {
-    # Temporary, for running some old tests (2020 04 27)
-    # message("Using old function stirling")
-    # sfn <- hdp:::stirling
-  # }
-
   numtable <- rep(0, length(maxtable))
   B <- unique(sort(maxtable))
   J <- match(maxtable, B)
@@ -66,7 +56,8 @@ randnumtable <- function(weights,maxtable){
     maxtable <- B[ii]
     if (maxtable > 0){
       mm <- 1:maxtable
-      stirnum <- sfn(maxtable)
+      # stir.closure is set in .onLoad (in zzz.R)
+      stirnum <- stir.closure(maxtable)
       for (jj in which(J == ii)){
         clik <- mm * weights[jj]
         clik <- cumsum(stirnum * exp(clik - max(clik)))

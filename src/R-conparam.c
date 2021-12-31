@@ -20,7 +20,7 @@
  *              fields if necessary.  Frees memory allocated.
  */
 
-#include "moreutils.h"
+#include "malloc_check.h"
 #include "R-conparam.h"
 
 CONPARAM *rReadConparamVector(SEXP cpin) {

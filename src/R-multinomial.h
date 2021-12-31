@@ -6,7 +6,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "R-utils.h"
-#include "moreutils.h"
+#include "malloc_check.h"
 
 
 typedef struct {

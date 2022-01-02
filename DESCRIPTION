@@ -1,6 +1,6 @@
 Package: hdpx
 Title: Hierarchical Dirichlet process for categorical count data, expanded
-Version: 0.3.5
+Version: 0.3.6
 Authors@R: c(person("Steve", "Rozen", email="steverozen@gmail.com", role="aut"),
   person("Mo", "Liu", email="liumolm@gmail.com", role="aut"),
   person("Nicola", "Roberts", email="nr3@sanger.ac.uk", role=c("aut", "cre")),
@@ -68,6 +68,7 @@ Collate:
     'diagnostic_in_extraction.R'
     'dp_activate.R'
     'dp_freeze.R'
+    'extract_ccc_from_hdp.R'
     'extract_components_from_clusters.R'
     'globals.R'
     'hdp.R'

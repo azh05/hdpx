@@ -10,7 +10,7 @@ plot_component_posterior_samples(components, retval)
 \item{components}{A matrix that containing components with each row corresponding a category and each column
 corresponding a component}
 
-\item{retval}{An object return from \code{\link{extract_ccc_cdc_from_hdp}}}
+\item{retval}{An object return from \code{\link{extract_ccc_from_hdp}}}
 }
 \description{
 Plot the distribution of raw clusters highly similar as the component in posterior chains

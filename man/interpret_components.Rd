@@ -42,13 +42,9 @@ In the information that follows, a "component" is
  In the case of mutational signature analysis, most of the columns
  correspond to an input biological sample (e.g. individual tumor).}
 
-\item{moderate_confidence_components}{Analogous to \code{high_confidence_compents} except for
- components with constituent raw clusters found in >= \code{moderate.confidence.prop} and
-  < \code{high_confidence_prop} posterior samples.}
-
-
 \item{low_confidence_components}{Analogous to \code{high_confidence_compents} except for
- components with constituent raw clusters found in  < \code{moderate.confidence.prop} posterior samples.}
+ components with constituent raw clusters found in
+ < \code{high.confidence.prop} posterior samples.}
 
 \item{low_confidence_components_post_number}{Analogous
   to \code{high_confidence_components_post_number}.}

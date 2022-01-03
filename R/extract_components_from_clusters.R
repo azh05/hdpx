@@ -37,7 +37,7 @@
 
 extract_components_from_clusters <-  function(x,
                                               cos.merge = 0.90,
-                                              hc.cutoff = 0.12
+                                              hc.cutoff #  = 0.12
 
 ){
   if (class(x)=="hdpSampleChain") {
@@ -287,9 +287,6 @@ extract_components_from_clusters <-  function(x,
 
 
   }
-
-
-
 
   return(
     invisible(

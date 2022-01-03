@@ -30,16 +30,9 @@
 #'  In the case of mutational signature analysis, most of the columns
 #'  correspond to an input biological sample (e.g. individual tumor).}
 #'
-#' \item{moderate_confidence_components}{Analogous to \code{high_confidence_compents} except for
-#'  components with constituent raw clusters found in >= \code{moderate.confidence.prop} and
-#'   < \code{high_confidence_prop} posterior samples.}
-#'
-# \item{moderate_confidence_components_post_number}{Analogous to \code{high_confidence_components_post_number}.}
-#
-# \item{moderate_confidence_components_cdc}{Analogous to \code{high_confidence_components_cdc}.}
-#'
 #' \item{low_confidence_components}{Analogous to \code{high_confidence_compents} except for
-#'  components with constituent raw clusters found in  < \code{moderate.confidence.prop} posterior samples.}
+#'  components with constituent raw clusters found in
+#'  < \code{high.confidence.prop} posterior samples.}
 #'
 #' \item{low_confidence_components_post_number}{Analogous
 #'   to \code{high_confidence_components_post_number}.}
@@ -53,7 +46,6 @@
 
 interpret_components <- function(multi.chains.retval,
                                  high.confidence.prop = 0.90,
-                                 # moderate.confidence.prop = 0.50,
                                  verbose              = TRUE) {
   if (verbose) message("extracting components ", Sys.time())
 
@@ -87,14 +79,7 @@ interpret_components <- function(multi.chains.retval,
   high_confidence_components_cdc <-
     components_cdc[,which(components_post_number[,2]>=(high.confidence.prop*nsamp))]
 
-  #the components with more than moderate.confidence.prop nsamples but less
-  #than confidence.prop samples are selected as components with
-  #moderate confidence
-  # moderate_confidence_components <- components_category_counts[,intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp)))]
-  # moderate_confidence_components_post_number <- components_post_number[intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp))),]
-  # moderate_confidence_components_cdc <- components_cdc[,intersect(which(components_post_number[,2]>=(moderate.confidence.prop*nsamp)),which(components_post_number[,2]<(high.confidence.prop*nsamp)))]
-
-  #the components with less than moderate.confidence.prop nsamples
+  #the components with less than high.confidence.prop nsamples
   #are selected as low confidence components
   low_confidence_components <-
     components_category_counts[,which(components_post_number[,2]<(high.confidence.prop*nsamp))]
@@ -110,15 +95,12 @@ interpret_components <- function(multi.chains.retval,
   low_confidence_components_cdc <- cbind(low_confidence_components_cdc,multi.chains.retval$each.chain.noise.cdc)
 
   return(invisible(list(
-    high_confidence_components                         = high_confidence_components,
-    high_confidence_components_post_number             = high_confidence_components_post_number,
-    high_confidence_components_cdc                     = high_confidence_components_cdc,
-    # moderate_confidence_components                     = moderate_confidence_components,
-    # moderate_confidence_components_post_number         = moderate_confidence_components_post_number,
-    # moderate_confidence_components_cdc                 = moderate_confidence_components_cdc,
-    low_confidence_components                          = low_confidence_components,
-    low_confidence_components_post_number              = low_confidence_components_post_number,
-    low_confidence_components_cdc                      = low_confidence_components_cdc
+    high_confidence_components             = high_confidence_components,
+    high_confidence_components_post_number = high_confidence_components_post_number,
+    high_confidence_components_cdc         = high_confidence_components_cdc,
+    low_confidence_components              = low_confidence_components,
+    low_confidence_components_post_number  = low_confidence_components_post_number,
+    low_confidence_components_cdc          = low_confidence_components_cdc
   )))
 
 }

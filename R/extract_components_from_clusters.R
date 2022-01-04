@@ -3,27 +3,49 @@
 #' @param x An \code{\link{hdpSampleChain-class}} or \
 #' code{\link{hdpSampleMulti-class}} object
 #'
-#' @param cos.merge Merge raw cluster that have cosine similarity above this
-#'  threshold.
-#'
 #' @param hc.cutoff the height to cut hierarchical clustering tree
 #'
 #' @return A list with the elements \describe{
-#' \item{components}{Clusters profile as a data frame.Rows represent the categories and columns are index.
-#'                each cell contains number of items}
-#' \item{components.post.samples}{A data frame with two columns: one is the index and the other is number of posterior
-#'                              samples that extract raw clusters contributing to \code{components}}
-#' \item{components.cdc}{A categ_dp_counts matrix. Each row is a dp and each column corresponds to the cluster
-#'                     in \code{components}}
-#' \item{each.chain.noise.clusters}{A list of raw clusters that only found in one posterior sample of each chain.
-#'                              These clusters were selected before hierarchical clustering to save computational time}
-#' \item{each.chain.noise.cdc}{A categ_dp_counts matrix with each row is a dp and each column corresponds to
+#' \item{components}{Aggregated clusters as a data frame.
+#'   Rows represent the categories (i.e. for
+#'   mutational signature analysis, the mutation type,
+#'   e.g. ACT -> AGT). Columns are
+#'   aggregated clusters, i.e. clusters after all
+#'   "raw clusters" across all Gibbs samples have been
+#'   combined according to the divisive clustering.
+#'   Each cell contains number of items (for mutational
+#'   signature analysis, the number of mutations) of
+#'   a particular category in a particular aggregated
+#'   cluster.}
+#'
+#' \item{components.post.samples}{A data frame with
+#'   two columns: one is the index of column in
+#'   \code{components} and
+#'   the other is the number of posterior
+#'   samples that contributed to that aggregated
+#'   cluster (column in \code{components}).}
+#'
+#' \item{components.cdc}{A numerical matrix.
+#'    Each row is a Dirichlet process (DP).
+#'    This can either be a leaf DP, which
+#'    for mutational signatures corresponds
+#'    to a biological sample (for exampl, a tumor),
+#'    or an parent or ancestor DP.
+#'    Each column corresponds to the cluster
+#'    in the corresponding column n \code{components}}
+#'
+#' \item{each.chain.noise.clusters}{Mo to document, called each.chain.noise.spectrum internally}
+#'
+#' \item{each.chain.noise.cdc}{A matrix with each row
+#'  XXXXX OLD  Mo, to review is a dp and each column corresponds to
 #'                            the cluster in \code{each.chain.noise.clusters}}
+#'
 #' \item{multi.chains}{An \code{\link{hdpSampleChain-class}}
 #'    or \code{\link{hdpSampleMulti-class}}
-#'    object updated with component information
-#' }
-#' \item{nsamp}{The total number of posterior samples.}
+#'    object updated with component information.}
+#'
+#' \item{nsamp}{The total number of posterior samples across all
+#'   Gibbs sampling chains.}
 #' }
 #'
 #'
@@ -35,11 +57,7 @@
 #'
 #' @export
 
-extract_components_from_clusters <-  function(x,
-                                              cos.merge = 0.90,
-                                              hc.cutoff #  = 0.12
-
-){
+extract_components_from_clusters <-  function(x, hc.cutoff = 0.1) {
   if (class(x)=="hdpSampleChain") {
     message('Extracting components on single chain.A hdpSampleMulti object is recommended, see ?hdp_multi_chain')
     is_multi <- FALSE
@@ -47,12 +65,6 @@ extract_components_from_clusters <-  function(x,
     is_multi <- TRUE
   } else {
     stop("x must have class hdpSampleChain or hdpSampleMulti")
-  }
-
-  # if (!validObject(x)) stop("x not a valid object")
-
-  if (class(cos.merge) != "numeric" | cos.merge >=1 | cos.merge <= 0) {
-    stop("cos.merge must be between 0 and 1")
   }
 
   if (is_multi) {
@@ -257,36 +269,6 @@ extract_components_from_clusters <-  function(x,
   spectrum.df <- merge_cols(as.matrix(dataframe),clusters)
   spectrum.stats <- aggregate(stats.dataframe[,2],by=list(clusters),sum)
   spectrum.cdc <- merge_cols(as.matrix(dp.dataframe),clusters)
-
-  #needs one step to merge clusters with high cosine similarities
-  #comment this out first
-  if(F){
-    clust_cos <- cosCpp(as.matrix(spectrum.df))
-    clust_label <- c(1:ncol(spectrum.df))
-    colnames(spectrum.df) <- c(1:ncol(spectrum.df))
-    colnames(spectrum.cdc) <- c(1:ncol(spectrum.df))
-    clust_same <- (clust_cos > cos.merge & lower.tri(clust_cos))
-    same <- which(clust_same, arr.ind=TRUE) # merge these columns
-    while(length(same)>0){
-
-      for (i in 1:nrow(same)){
-        clust_label[same[i, 1]] <- clust_label[same[i, 2]]
-      }
-      spectrum.df <- merge_cols(as.matrix(spectrum.df),clust_label)
-      spectrum.stats <- aggregate(spectrum.stats[,2],by=list(clust_label),sum)
-      spectrum.cdc <- merge_cols(as.matrix(spectrum.cdc),clust_label)
-
-
-      clust_cos <- cosCpp(as.matrix(spectrum.df))
-      clust_label <- c(1:ncol(spectrum.df))
-      colnames(spectrum.df) <- c(1:ncol(spectrum.df))
-      colnames(spectrum.cdc) <- c(1:ncol(spectrum.df))
-      clust_same <- (clust_cos > 0.99 & lower.tri(clust_cos))
-      same <- which(clust_same, arr.ind=TRUE) # merge these columns
-    }
-
-
-  }
 
   return(
     invisible(

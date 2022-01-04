@@ -1,7 +1,7 @@
 #' Extract components (aggregated clusters) and exposures from multiple posterior sample chains.
 #'
-#' @param multi.chains.retval A list of objects returned from
-#'   \code{\link[mSigHdp]{CombineChainsAndExtractSigs}}.
+#' @param multi.chains.retval A list that contains all the
+#'  elements returned by \code{\link{extract_components_from_clusters}}.
 #'
 #' @param high.confidence.prop Components found in
 #'   \eqn{>=} \code{high.confidence.prop} proportion of
@@ -50,18 +50,8 @@ interpret_components <- function(multi.chains.retval,
   if (verbose) message("extracting components ", Sys.time())
 
   components_category_counts <- multi.chains.retval$components
-  # A data frame in which each column represents a component: ie a cluster of
-  # mutations created from the union of some raw components that we think
-  # represent the same abstract cluster. In the application to mutational
-  # signature extraction, each row is a mutation type; in the application to
-  # probabilistic topic modeling, each row is a word. Each cell contains the
-  # number of mutations of a given mutation type in a given cluster.
 
   components_post_number <- multi.chains.retval$components.post.samples
-  # A data frame with with 2 columns. The first column contains the index of a
-  # column in components_category_counts, the second column contains the number of posterior
-  # samples in which the raw components contributing the component appeared.
-
 
   nsamp <-  multi.chains.retval$nsamp
   components_cdc <- multi.chains.retval$components.cdc
@@ -90,9 +80,13 @@ interpret_components <- function(multi.chains.retval,
 
   #noise components also include components that only occur in one posterior
   #sample of each chain
-  low_confidence_components <- cbind(low_confidence_components,multi.chains.retval$each.chain.noise.components)
+  low_confidence_components <-
+    cbind(low_confidence_components,
+          multi.chains.retval$each.chain.noise.components)
 
-  low_confidence_components_cdc <- cbind(low_confidence_components_cdc,multi.chains.retval$each.chain.noise.cdc)
+  low_confidence_components_cdc <-
+    cbind(low_confidence_components_cdc,
+          multi.chains.retval$each.chain.noise.cdc)
 
   return(invisible(list(
     high_confidence_components             = high_confidence_components,

@@ -11,8 +11,8 @@ interpret_components(
 )
 }
 \arguments{
-\item{multi.chains.retval}{A list of objects returned from
-\code{\link[mSigHdp]{CombineChainsAndExtractSigs}}.}
+\item{multi.chains.retval}{A list that contains all the
+elements returned by \code{\link{extract_components_from_clusters}}.}
 
 \item{high.confidence.prop}{Components found in
 \eqn{>=} \code{high.confidence.prop} proportion of

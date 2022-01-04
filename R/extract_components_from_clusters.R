@@ -206,7 +206,7 @@ extract_components_from_clusters <-  function(x, hc.cutoff = 0.1) {
   }
   summary <- mapply(cosmergechain,ccc_0,cdc_0,SIMPLIFY = F)
 
-  dataframe <- all.noise.spectrum <- data.frame(matrix(nrow=ncat,ncol=0))
+  dataframe <- each.chain.noise.spectrum <- data.frame(matrix(nrow=ncat,ncol=0))
   stats.dataframe <- data.frame(matrix(nrow=0,ncol=2))
   dp.dataframe <- each.chain.noise.cdc <- data.frame(matrix(nrow=ndp,ncol=0))
 
@@ -216,7 +216,7 @@ extract_components_from_clusters <-  function(x, hc.cutoff = 0.1) {
     dp.dataframe <- cbind(dp.dataframe,summary[[i]]$spectrum_cdc)
     stats.dataframe <- rbind(stats.dataframe,summary[[i]]$spectrum_stats)
     if(!is.null(summary[[i]]$noise.spectrum)){
-      each.chain.noise.spectrum <- cbind(all.noise.spectrum,summary[[i]]$noise.spectrum)
+      each.chain.noise.spectrum <- cbind(each.chain.noise.spectrum,summary[[i]]$noise.spectrum)
       each.chain.noise.cdc <- cbind(each.chain.noise.cdc,summary[[i]]$noise.cdc)
     }
 

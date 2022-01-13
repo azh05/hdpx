@@ -15,7 +15,7 @@ plot_component_with_credint(
 )
 }
 \arguments{
-\item{retval}{an object return from \code{\link{extract_ccc_cdc_from_hdp}}.}
+\item{retval}{an object return from \code{\link{extract_ccc_from_hdp}}.}
 
 \item{cat_names}{names displayed on x-axis, e.g. SBS96 mutation classes}
 

@@ -3,9 +3,9 @@ R pkg for Hierarchical Dirichlet Process
 
 
 To install, first ensure `remotes` package is installed and the BioConductor repositories are available (run `setRepositories()`). 
-It might take a few minutes to download any missing dependencies and build the vignettes. 
+It might take a few minutes to download any missing dependencies. 
 ```R
-remotes::install_github(repo = "steverozen/hdpx", ref = "master", build_vignettes = FALSE)
+remotes::install_github(repo = "steverozen/hdpx", ref = "master")
 ```
 
 Model categorical count data with a hierarchical Dirichlet
@@ -24,6 +24,10 @@ This R package is based on code forked from Nicola Roberts,
     details below).
     Robert's thesis is at
     https://www.repository.cam.ac.uk/bitstream/handle/1810/275454/Roberts-2018-PhD.pdf.
+    
+If you want to use this package for mutational signature discovery,
+you probably want to start with https://github.com/steverozen/mSigHdp,
+which calls this package.
     
 Subsequent changes by Rozen and Liu are confined to the R code.
     These include

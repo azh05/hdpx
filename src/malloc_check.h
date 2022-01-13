@@ -1,5 +1,5 @@
-#ifndef _MOREUTILS
-#define _MOREUTILS
+#ifndef _MALLOC_CHECK
+#define _MALLOC_CHECK
 
 #include <stdlib.h>
 

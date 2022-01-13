@@ -24,7 +24,7 @@
  */
 
 #include "R-base.h"
-#include "moreutils.h"
+#include "malloc_check.h"
 
 BASE *rReadBase(SEXP basein) {
   BASE *result;

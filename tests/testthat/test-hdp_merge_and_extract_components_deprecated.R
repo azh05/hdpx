@@ -1,3 +1,4 @@
+# This tests a deprecated function
 
 test_that("hdp_merge_and_extract_components", {
 
@@ -15,8 +16,6 @@ test_that("hdp_merge_and_extract_components", {
                                               exposure.CI = 0.95,
                                               cos.merge = 0.90,
                                               min.sample = 1)
-
-
 
   #save(retvalx, file = "hdp.merge.and.extract.components.expected.Rdata")
 

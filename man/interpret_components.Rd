@@ -2,38 +2,39 @@
 % Please edit documentation in R/interpret_components.R
 \name{interpret_components}
 \alias{interpret_components}
-\title{Extract components and exposures from multiple posterior sample chains.}
+\title{Extract components (aggregated clusters) and exposures from multiple posterior sample chains.}
 \usage{
 interpret_components(
   multi.chains.retval,
   high.confidence.prop = 0.9,
-  moderate.confidence.prop = 0.5,
-  verbose = T
+  verbose = TRUE
 )
 }
 \arguments{
-\item{multi.chains.retval}{A list of objects returned from \code{\link[mSigHdp]{CombineChainsAndExtractSigs}}.}
+\item{multi.chains.retval}{A list that contains all the
+elements returned by \code{\link{extract_components_from_clusters}}.}
 
-\item{high.confidence.prop}{Components found in >= \code{high.confidence.prop} of
+\item{high.confidence.prop}{Components found in
+\eqn{>=} \code{high.confidence.prop} proportion of
 posterior samples are high confidence components.}
-
-\item{moderate.confidence.prop}{Components found in < \code{moderate.confidence.prop} of posterior samples are considered low confidence components.}
 
 \item{verbose}{if TRUE, generate progress messages.}
 }
 \value{
 In the information that follows, a "component" is
- the union of multiple raw clusters of mutations (in the case of mutational
- signature analysis). Invisibly, a list with the following elements: \describe{
+ the union of multiple raw clusters of mutations (in the
+ case of mutational signature analysis).
+ Invisibly, a list with the following elements: \describe{
 
 \item{high_confidence_components}{A data frame containing the
    components found in >= \code{high.confidence.prop} of posterior samples. Each column is
    a component; in the case of mutational signatures the rows are mutation types.}
 
 \item{high_confidence_components_post_number}{A data frame
-  in which the first column contains the index of a column in \code{high_confidence_components}
- and the second column contains the number of posterior samples that
- contributed to that component.}
+  in which the first column contains the index of a column in
+  \code{high_confidence_components}
+  and the second column contains the number of posterior samples that
+  contributed to that component.}
 
 \item{high_confidence_components_cdc}{A matrix in which each row
  corresponds to one of the Dirichlet processes, and each column
@@ -41,24 +42,18 @@ In the information that follows, a "component" is
  In the case of mutational signature analysis, most of the columns
  correspond to an input biological sample (e.g. individual tumor).}
 
-\item{moderate_confidence_components}{Analogous to \code{high_confidence_compents} except for
- components with constituent raw clusters found in >= \code{moderate.confidence.prop} and
-  < \code{high_confidence_prop} posterior samples.}
-
-\item{moderate_confidence_components_post_number}{Analogous to \code{high_confidence_components_post_number}.}
-
-\item{moderate_confidence_components_cdc}{Analogous to \code{high_confidence_components_cdc}.}
-
 \item{low_confidence_components}{Analogous to \code{high_confidence_compents} except for
- components with constituent raw clusters found in  < \code{moderate.confidence.prop} posterior samples.}
+ components with constituent raw clusters found in
+ < \code{high.confidence.prop} posterior samples.}
 
-\item{low_confidence_components_post_number}{Analogous to \code{high_confidence_components_post_number}.}
+\item{low_confidence_components_post_number}{Analogous
+  to \code{high_confidence_components_post_number}.}
 
-\item{low_confidence_components_cdc}{Analogous to \code{high_confidence_components_cdc}.}
+\item{low_confidence_components_cdc}{Analogous
+  to \code{high_confidence_components_cdc}.}
 
 }
 }
 \description{
-This function returns components in which we have high confidence, moderate confidence, and low confidence
-(likely noise).
+Extract components (aggregated clusters) and exposures from multiple posterior sample chains.
 }

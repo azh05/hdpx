@@ -1,3 +1,6 @@
+# [ 0.3.9 ]
+* Removed unused variables from C code
+
 # [ 0.3.8 ]
 * Removed cos.merge argument from extract_components_from_clusters.
 * Improved documentation.

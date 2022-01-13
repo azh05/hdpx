@@ -341,17 +341,17 @@ void hdp_randbeta(HDP *hdp, int jj) {
 
 void hdp_randclassnt(HDP *hdp, int jj) {
   DP *alldp, *dp;
-  CONPARAM *conparam;
-  int numclass, numdp;
+  // CONPARAM *conparam;
+  int numclass;
   double alpha, *beta;
   int *classnd, *classnt, *pclassnd;
 
   /* temp variables */
   int cc, pp; // deleted tt, nd, sp, nt because compiler said they were unused
 
-  conparam = hdp->conparam;
+  // conparam = hdp->conparam;
   numclass = hdp->base->numclass;
-  numdp    = hdp->numdp;
+  // numdp    = hdp->numdp;
   alldp    = hdp->dp;
   dp       = alldp + jj;
 
@@ -410,9 +410,9 @@ void hdp_randdatacc(HDP *hdp, int jj) {
   HH hh;
   QQ *classqq;
   SS *datass, ss;
-  int numclass, *datacc, numdp, numdata, pp;
+  int numclass, *datacc, numdata, pp; // numdp,
   double alpha, *beta;
-  int *classnd, *classnt;
+  int *classnd; // , *classnt;
 
   /* temp variables */
   int ii, cc; //deleted unused variable kk
@@ -422,7 +422,7 @@ void hdp_randdatacc(HDP *hdp, int jj) {
   numclass    = base->numclass;
   hh          = base->hh;
   classqq     = base->classqq;
-  numdp       = hdp->numdp;
+  // numdp       = hdp->numdp;
   alldp       = hdp->dp;
   dp          = alldp + jj;
   clik        = hdp->clik;
@@ -434,7 +434,7 @@ void hdp_randdatacc(HDP *hdp, int jj) {
   datass     = dp->datass;
   datacc     = dp->datacc;
   classnd    = dp->classnd;
-  classnt    = dp->classnt;
+  // classnt    = dp->classnt;
   alpha      = dp->alpha;
   beta       = ( pp == -1 ) ? base->beta : alldp[pp].beta;
 
@@ -467,7 +467,7 @@ void hdp_randdatacc(HDP *hdp, int jj) {
       numclass = hdp_addclass(hdp);
       classqq  = base->classqq;
       classnd  = dp->classnd;
-      classnt  = dp->classnt;
+      // classnt  = dp->classnt;
       beta     = pp == -1 ? base->beta : alldp[pp].beta;
       clik     = hdp->clik;
     }
@@ -479,12 +479,12 @@ void hdp_iterate(HDP *hdp, double *iterlik,
     int numiter, int doconparam, int dolik) {
   BASE *base;
   QQ *classqq;
-  DP *alldp;
+  // DP *alldp;
   int numdp, *dpstate;
   int jj, cc, iter;
 
   numdp   = hdp->numdp;
-  alldp   = hdp->dp;
+  // alldp   = hdp->dp;
   dpstate = hdp->dpstate;
 
   for ( iter = 0 ; iter < numiter ; iter++ ) {
@@ -585,8 +585,8 @@ void hdp_dpholdout(HDP *hdp, int jj) {
   HH hh;
   QQ *classqq;
   SS *datass;
-  int numclass, numdata, pp, cp, tt, *classnd, *classnt, *pclassnd, *datacc,
-        *dpstate, *ppindex;
+  int numclass, numdata, pp, cp, tt, *classnt, *pclassnd, *datacc,
+        *dpstate, *ppindex; // *classnd,
 
   int cc, ii;
 
@@ -608,7 +608,7 @@ void hdp_dpholdout(HDP *hdp, int jj) {
 
   numclass = base->numclass;
   pp       = ppindex[jj];
-  classnd  = dp->classnd;
+  // classnd  = dp->classnd;
   classnt  = dp->classnt;
   if ( pp > -1 ) {
     pclassnd = alldp[pp].classnd;

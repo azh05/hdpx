@@ -54,9 +54,12 @@ hdp_burnin <- function(hdp,
     # Call the C code to do the Gibbs sampling iterations
     output <- iterate(hdplist, burnin, cpiter, verbosity)
   )
-  message("hdp_burnin time: ")
-  for (xn in names(burnin.time)) {
-    message(" ", xn, " ", burnin.time[[xn]])
+  
+  if (verbosity > 2) {
+    message("hdp_burnin time: ")
+    for (xn in names(burnin.time)) {
+      message(" ", xn, " ", burnin.time[[xn]])
+    }
   }
 
   return(invisible(list(hdplist   = output[[1]],

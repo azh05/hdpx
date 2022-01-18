@@ -13,4 +13,12 @@ test_that("extract_components_from_clusters", {
   # save(retvalx, file = "extract_components_from_clusters.expected.Rdata")
 
   expect_equal(retvalx, reg2$retvalx)
+
+  reg3 <- new.env()
+  load("interpret_components_retval2.Rdata", envir = reg3)
+
+  retval2 <- interpret_components(retvalx)
+
+  # save(retval2, file = "interpret_components_retval2.Rdata")
+  expect_equal(retval2, reg3$retval2)
 })

@@ -62,21 +62,29 @@ interpret_components <- function(multi.chains.retval,
 
   #the components with more than high.confidence.prop nsamples are
   #selected as components with high confidence
+
+  high.conf.TF <-
+    components_post_number[,2]>=(high.confidence.prop*nsamp)
+
   high_confidence_components <-
-    components_category_counts[,which(components_post_number[,2]>=(high.confidence.prop*nsamp))]
+    components_category_counts[ , high.conf.TF, drop = FALSE]
+
   high_confidence_components_post_number <-
-    components_post_number[which(components_post_number[,2]>=(high.confidence.prop*nsamp)),]
+    components_post_number[high.conf.TF,]
+
   high_confidence_components_cdc <-
-    components_cdc[,which(components_post_number[,2]>=(high.confidence.prop*nsamp))]
+    components_cdc[ , high.conf.TF, drop = FALSE]
 
   #the components with less than high.confidence.prop nsamples
   #are selected as low confidence components
   low_confidence_components <-
-    components_category_counts[,which(components_post_number[,2]<(high.confidence.prop*nsamp))]
+    components_category_counts[, !high.conf.TF, drop = FALSE]
+
   low_confidence_components_post_number <-
-    components_post_number[which(components_post_number[,2]<(high.confidence.prop*nsamp)),]
+    components_post_number[!high.conf.TF, ]
+
   low_confidence_components_cdc <-
-    components_cdc[,which(components_post_number[,2]<(high.confidence.prop*nsamp))]
+    components_cdc[, !high.conf.TF, drop = FALSE]
 
   #noise components also include components that only occur in one posterior
   #sample of each chain

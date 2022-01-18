@@ -257,12 +257,8 @@ extract_components_from_clusters <-  function(x, hc.cutoff = 0.1) {
   dataframe.normed <- apply(dataframe,2,function(x)x/sum(x))
   cosine.dist.df <- parallelDist::parallelDist(t(dataframe.normed),method = "cosine")
 
-
-
-  print(paste0("Performing divisive hierarchical clustering"))
   cosine.dist.hctree.diana <- cluster::diana(x = cosine.dist.df,diss = T)
   cosine.dist.hctree <- stats::as.hclust(cosine.dist.hctree.diana)
-
 
   # Find clusters composed of highly similar clusters
   clusters <- dendextend::cutree(cosine.dist.hctree,  h=hc.cutoff)

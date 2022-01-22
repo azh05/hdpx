@@ -101,13 +101,15 @@ hdp_posterior_sample <- function(post.input,
 
 
     #report time every 10 samples if > 1 min has passed
-    tracktime <- Sys.time()
-    curriter <- curriter + post.space
-    if (mindifftime(prevtime, tracktime) > 1 & samp %% 10 == 0){
-      elapsedtime <- mindifftime(starttime, tracktime)
-      print(sprintf("Current sampling: %1.1f mins;Estimated Time of Completion: %1.1f mins",
-                    elapsedtime, elapsedtime / curriter * totiter))
-      prevtime <- tracktime
+    if (post.verbosity > 2) {
+      tracktime <- Sys.time()
+      curriter <- curriter + post.space
+      if (mindifftime(prevtime, tracktime) > 1 & samp %% 10 == 0){
+        elapsedtime <- mindifftime(starttime, tracktime)
+        print(sprintf("Current sampling: %1.1f mins;Estimated Time of Completion: %1.1f mins",
+                      elapsedtime, elapsedtime / curriter * totiter))
+        prevtime <- tracktime
+      }
     }
     if(checkpoint){
       if(samp %% 10 == 0){

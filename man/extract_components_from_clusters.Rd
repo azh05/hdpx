@@ -44,9 +44,10 @@ A list with the elements \describe{
 
 \item{each.chain.noise.clusters}{Mo to document, called each.chain.noise.spectrum internally}
 
-\item{each.chain.noise.cdc}{A matrix with each row
- XXXXX OLD  Mo, to review is a dp and each column corresponds to
-                           the cluster in \code{each.chain.noise.clusters}}
+\item{each.chain.noise.cdc}{A matrix.
+   Each row is a dirichlet process and
+   each column corresponds to
+   the cluster in \code{each.chain.noise.clusters}}
 
 \item{multi.chains}{An \code{\link{hdpSampleChain-class}}
    or \code{\link{hdpSampleMulti-class}}

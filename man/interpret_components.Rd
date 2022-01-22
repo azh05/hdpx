@@ -7,7 +7,7 @@
 interpret_components(
   multi.chains.retval,
   high.confidence.prop = 0.9,
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{

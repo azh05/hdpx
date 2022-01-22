@@ -40,7 +40,7 @@ hdp_posterior_sample <- function(post.input,
 
   if(class(post.input)[1] == "hdpSampleChain"){ #extend Gibbs sampling
 
-    message("Extend Gibbs Sampling")
+    if (post.verbosity > 0) message("Extend Gibbs Sampling")
 
     post.input <- as.list(post.input)
 
@@ -50,10 +50,11 @@ hdp_posterior_sample <- function(post.input,
 
   }else if(class(post.input) == "list"){
       sampling.input <- post.input
-      message("Gibbs Sampling after Burn-in Iteration")
+
+      if (post.verbosity > 0) message("Gibbs Sampling after Burn-in Iteration")
 
     }else{
-    message("Input is not a hdpSampleChain or a list from hdp_burnin")
+     if (post.verbosity > 0) message("Input is not a hdpSampleChain or a list from hdp_burnin")
     stop()
     }
 
@@ -113,7 +114,7 @@ hdp_posterior_sample <- function(post.input,
     }
     if(checkpoint){
       if(samp %% 10 == 0){
-        message("Checkpoint after collecting ",samp," posterior samples")
+        if (post.verbosity > 3) message("Checkpoint after collecting ",samp," posterior samples")
         numclass <- sapply(sample, function(x) x$numclass)
         classqq <- lapply(sample, function(x) x$classqq)
         classnd <- lapply(sample, function(x) as(x$classnd, "dgCMatrix"))

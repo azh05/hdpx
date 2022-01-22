@@ -21,9 +21,9 @@ random seed from 1 -- 10^7, reported in the output.}
 A hdpState object with activated DPs and an initial random cluster allocation for each data item. See \code{\link{hdpState-class}}
 }
 \description{
-Specifiy the number of starting clusters, and activate the DP nodes to be
+Specify the number of starting clusters, and activate the DP nodes to be
 included in the posterior sampling process (\code{\link{hdp_posterior}}).
-When initialised, the DP nodes are 'heldout' (not available for posterior sampling).
+When initialised, the DP nodes are 'held out' (not available for posterior sampling).
 }
 \details{
 Note that this step can be slow and memory-intensive for very large datasets.

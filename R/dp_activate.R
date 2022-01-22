@@ -1,8 +1,8 @@
 #' Activate DP nodes
 #'
-#' Specifiy the number of starting clusters, and activate the DP nodes to be
+#' Specify the number of starting clusters, and activate the DP nodes to be
 #' included in the posterior sampling process (\code{\link{hdp_posterior}}).
-#' When initialised, the DP nodes are 'heldout' (not available for posterior sampling).
+#' When initialised, the DP nodes are 'held out' (not available for posterior sampling).
 #'
 #' Note that this step can be slow and memory-intensive for very large datasets.
 #'

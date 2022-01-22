@@ -1,9 +1,9 @@
 # hdpx
 R pkg for hierarchical Dirichlet process mixture modeling
 
-
 This package in only supported on Linux systems.
-To install, first ensure that the `remotes` package is installed and the BioConductor repositories 
+To install, first ensure that the `remotes` package is 
+installed and the BioConductor repositories 
 are available (run `setRepositories()` and choose the BioC items). 
 It might take a few minutes to download any missing dependencies. 
 To install the latest stable version:

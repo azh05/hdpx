@@ -46,7 +46,7 @@
 
 interpret_components <- function(multi.chains.retval,
                                  high.confidence.prop = 0.90,
-                                 verbose              = TRUE) {
+                                 verbose              = FALSE) {
   if (verbose) message("extracting components ", Sys.time())
 
   components_category_counts <- multi.chains.retval$components

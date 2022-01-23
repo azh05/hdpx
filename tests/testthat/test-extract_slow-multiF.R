@@ -1,6 +1,7 @@
 test_that("extract_components_from_clusters-slow-multiF", {
   if (Sys.getenv("HDPX_LONG") == "") {
     skip("Sys.setenv(HDPX_LONG=\"Y\") to enable long tests")
+    # Sys.setenv(HDPX_LONG="Y")
   }
 
   in_env <- new.env()
@@ -42,5 +43,7 @@ test_that("extract_components_from_clusters-slow-multiF", {
   }
 
   expect_equal(in.com.ret, reg3$in.com.ret)
+  # expect_equal(in.com.ret$low_confidence_components_cdc,
+  #              as.matrix(reg3$in.com.ret$low_confidence_components_cdc[, 1:23]))
 })
 

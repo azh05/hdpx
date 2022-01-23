@@ -78,8 +78,6 @@ Collate:
     'hdp_addconparam.R'
     'hdp_adddp.R'
     'hdp_burnin.R'
-    'hdp_extract_components.R'
-    'hdp_merge_and_extract_components.R'
     'hdp_getstate.R'
     'hdp_init.R'
     'hdp_multi_chain.R'

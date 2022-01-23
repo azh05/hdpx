@@ -19,6 +19,8 @@ test_that("extract_components_from_clusters", {
 
   retval2 <- interpret_components(retvalx)
 
-  # save(retval2, file = "interpret_components_retval2.Rdata")
+  if (FALSE) {
+    save(retval2, file = "interpret_components_retval2.Rdata")
+  }
   expect_equal(retval2, reg3$retval2)
 })

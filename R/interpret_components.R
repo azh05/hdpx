@@ -1,7 +1,7 @@
-#' Extract components (aggregated clusters) and exposures from multiple posterior sample chains.
+#' Separate high and low confidence components (aggregated clusters) and exposures
 #'
 #' @param multi.chains.retval A list that contains all the
-#'  elements returned by \code{\link{extract_components_from_clusters}}.
+#'  elements returned by \code{\link{extract_components}}.
 #'
 #' @param high.confidence.prop Components found in
 #'   \eqn{>=} \code{high.confidence.prop} proportion of
@@ -89,18 +89,6 @@ interpret_components <- function(multi.chains.retval,
 
   low_confidence_components_cdc <-
     components_cdc[, !high.conf.TF, drop = FALSE]
-
-  if (FALSE) { # test if we can remove this without breaking mSigHdp
-  #noise components also include components that only occur in one posterior
-  #sample of each chain
-  low_confidence_components <-
-    cbind(low_confidence_components,
-          multi.chains.retval$each.chain.noise.components)
-
-  low_confidence_components_cdc <-
-    cbind(low_confidence_components_cdc,
-          multi.chains.retval$each.chain.noise.cdc)
-  }
 
   return(invisible(list(
     high_confidence_components             = high_confidence_components,

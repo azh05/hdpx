@@ -112,12 +112,9 @@ first_merge <- function(ccc, cdc, threshold = 0.99) {
 #'    Each column corresponds to the cluster
 #'    in the corresponding column n \code{components}}
 #'
-#' \item{each.chain.noise.clusters}{Mo to document, called each.chain.noise.spectrum internally}
+#' \item{each.chain.noise.clusters}{Deprecated.}
 #'
-#' \item{each.chain.noise.cdc}{A matrix.
-#'    Each row is a dirichlet process and
-#'    each column corresponds to
-#'    the cluster in \code{each.chain.noise.clusters}}
+#' \item{each.chain.noise.cdc}{Deprecated.}
 #'
 #' \item{multi.chains}{An \code{\link{hdpSampleChain-class}}
 #'    or \code{\link{hdpSampleMulti-class}}
@@ -136,9 +133,11 @@ first_merge <- function(ccc, cdc, threshold = 0.99) {
 #'
 #' @export
 
-extract_components_from_clusters <-  function(x, hc.cutoff = 0.1) {
+extract_components <-  function(x, hc.cutoff = 0.1) {
   if (class(x)=="hdpSampleChain") {
-    message('Extracting components on single chain. A hdpSampleMulti object is recommended, see ?hdp_multi_chain')
+    if (verbose)
+      message('Extracting components on single chain. ',
+      'A hdpSampleMulti object is recommended, see ?hdp_multi_chain')
     is_multi <- FALSE
   } else if (class(x)=="hdpSampleMulti") {
     chlist <- x@chains
@@ -161,7 +160,6 @@ extract_components_from_clusters <-  function(x, hc.cutoff = 0.1) {
     set.seed(sampling_seed(chlist[[1]]), kind="Mersenne-Twister", normal.kind="Inversion")
     finalstate <- final_hdpState(chlist[[1]])
     nsamp <- sum(sapply(chlist, function(x) hdp_settings(x)$n))
-
   }
 
   # number of categories, DPs,data items at each DP, and frozen priors

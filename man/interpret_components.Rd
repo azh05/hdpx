@@ -2,7 +2,7 @@
 % Please edit documentation in R/interpret_components.R
 \name{interpret_components}
 \alias{interpret_components}
-\title{Extract components (aggregated clusters) and exposures from multiple posterior sample chains.}
+\title{Separate high and low confidence components (aggregated clusters) and exposures}
 \usage{
 interpret_components(
   multi.chains.retval,
@@ -12,7 +12,7 @@ interpret_components(
 }
 \arguments{
 \item{multi.chains.retval}{A list that contains all the
-elements returned by \code{\link{extract_components_from_clusters}}.}
+elements returned by \code{\link{extract_components}}.}
 
 \item{high.confidence.prop}{Components found in
 \eqn{>=} \code{high.confidence.prop} proportion of
@@ -55,5 +55,5 @@ In the information that follows, a "component" is
 }
 }
 \description{
-Extract components (aggregated clusters) and exposures from multiple posterior sample chains.
+Separate high and low confidence components (aggregated clusters) and exposures
 }

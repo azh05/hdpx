@@ -1,3 +1,7 @@
+# [ 1.0.1 ]
+* Simplified interpret_components and extract_components
+* Renamed extract_components_from_clusters to extract_components
+
 # [ 0.3.9 ]
 * Removed unused variables from C code
 

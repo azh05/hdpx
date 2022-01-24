@@ -26,9 +26,9 @@
 #' hdp <- hdp_setdata(hdp, 5:104, example_data_hdp_prior)
 #' hdp <- dp_activate(hdp, 4:104, initcc=4, seed=81479)
 #' hdp <- hdp_posterior(hdp, burnin=2000, n=50, space=50, cpiter=3, seed=1e6)
-#' hdp_ex <- hdp_extract_components(hdp)
-#' plot_comp_size(hdp_ex)
-#' plot_comp_distn(hdp_ex)
+# hdp_ex <- hdp_extract_components(hdp)
+# plot_comp_size(hdp_ex)
+# plot_comp_distn(hdp_ex)
 
 
 

@@ -16,17 +16,17 @@ diagnostic_in_extraction(
 )
 }
 \arguments{
-\item{clust_hdp0_ccc}{An object in \code{\link{hdp_merge_and_extract_components}}.}
+\item{clust_hdp0_ccc}{This function is deprecated.}
 
-\item{ncat}{Number of categories. An internal object from \code{\link{hdp_merge_and_extract_components}}.}
+\item{ncat}{Number of categories.}
 
-\item{nsamp}{Number of posterior samples. An internal object from \code{\link{hdp_merge_and_extract_components}}.}
+\item{nsamp}{Number of posterior samples.}
 
-\item{nch}{Number of posterior chains. An internal object from \code{\link{hdp_merge_and_extract_components}}.}
+\item{nch}{Number of posterior chains.}
 
-\item{ccc}{clust_categ_counts from \code{\link{hdp_merge_and_extract_components}}.}
+\item{ccc}{clust_categ_counts.}
 
-\item{cdc}{clust_dp_counts from \code{\link{hdp_merge_and_extract_components}}.}
+\item{cdc}{clust_dp_counts .}
 
 \item{diagnostic.folder}{A directory where details for hdp.0 are plotted.}
 }
@@ -36,7 +36,4 @@ The plots of presence of a raw cluster in each chain.
 \description{
 Diagnostic plotting inside of hdp_merge_and_extract_components function.
 This function generates details of the raw clusters in hdp.0
-}
-\seealso{
-\code{\link{hdp_merge_and_extract_components}}
 }

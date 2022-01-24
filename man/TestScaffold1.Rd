@@ -74,11 +74,10 @@ e.g. \code{c("SA.Syn.Ovary-AdenoCA", "SA.Syn.Ovary-AdenoCA", "SA.Syn.Kidney-RCC"
 \code{verbosity}.}
 
 \item{cos.merge}{The cosine similarity threshold for merging raw clusters
-from the posterior sampling chains into "components" i.e. signatures;
-passed to \code{\link[hdpx]{hdp_extract_components}}.}
+from the posterior sampling chains into "components" i.e. signatures.}
 
 \item{min.sample}{A "component" (i.e. signature) must have at least
-this many samples; passed to \code{\link[hdpx]{hdp_extract_components}}.}
+this many samples.}
 
 \item{checkpoint.aft.post}{If non-\code{NULL}, a file path to checkpoint
 the list of values returned from the calls to \code{\link[hdpx]{hdp_posterior}}

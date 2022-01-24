@@ -130,12 +130,11 @@ counting within-DP cluster assignment (aggregating across data categories).
 Number of rows is the number of DPs (constant), and number of
 columns is the number of clusters in that posterior sample (variable).}
 
-\item{\code{numcomp}}{Number of global components extracted by \code{hdp_extract_components}
-(not including component 0)}
+\item{\code{numcomp}}{Number of global components}
 
 \item{\code{prop.ex}}{(Average) proportion of dataset explained by the extracted components}
 
-\item{\code{comp_cos_merge}}{\code{cos.merge} setting used by \code{hdp_extract_components}}
+\item{\code{comp_cos_merge}}{\code{cos.merge} setting used by \code{hdp_extract_components}; deprecated}
 
 \item{\code{comp_categ_counts}}{List of matrices (one for each component)
 counting the sample-category data assignment across all DP nodes.

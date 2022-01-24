@@ -7,7 +7,6 @@
 #' see \code{\link{plot_lik}}, \code{\link{plot_numcluster}}, and
 #' \code{\link{plot_data_assigned}}. Can collect multiple
 #' independent HDP sampling chains in a hdpSampleMulti object via \code{\link{hdp_multi_chain}}.
-#' Components are extracted via \code{\link{hdp_extract_components}}.
 #'
 #' @param post.input An S4 object from \code{\link{hdp_burnin}}.
 #' @param post.n The number of posterior samples to collect.
@@ -20,8 +19,8 @@
 #' @param checkpoint If \code{TRUE}, a checkpoint will be saved for every 10 posterior samples
 #' @return A hdpSampleChain object with the salient information from each
 #'  posterior sample. See \code{\link{hdpSampleChain-class}}
-#' @seealso \code{\link{hdp_multi_chain}}, \code{\link{hdp_extract_components}},
-#'  \code{\link{cull_posterior_samples}}, \code{\link{plot_lik}}, \code{\link{plot_numcluster}},
+#' @seealso \code{\link{hdp_multi_chain}},
+#'   \code{\link{cull_posterior_samples}}, \code{\link{plot_lik}}, \code{\link{plot_numcluster}},
 #'  \code{\link{plot_data_assigned}}
 #' @importClassesFrom Matrix dgCMatrix
 #' @export

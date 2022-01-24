@@ -43,7 +43,6 @@ with \code{space} iterations between each collected sample. To plot output,
 see \code{\link{plot_lik}}, \code{\link{plot_numcluster}}, and
 \code{\link{plot_data_assigned}}. Can collect multiple
 independent HDP sampling chains in a hdpSampleMulti object via \code{\link{hdp_multi_chain}}.
-Components are extracted via \code{\link{hdp_extract_components}}.
 }
 \examples{
 my_hdp <- hdp_init(ppindex=0, cpindex=1, hh=rep(1, 6), alphaa=rep(1, 3), alphab=rep(2, 3))
@@ -55,7 +54,7 @@ my_hdp_chain <- hdp_posterior(my_hdp, 100, 100, 10)
 
 }
 \seealso{
-\code{\link{hdp_multi_chain}}, \code{\link{hdp_extract_components}},
+\code{\link{hdp_multi_chain}},
  \code{\link{cull_posterior_samples}}, \code{\link{plot_lik}}, \code{\link{plot_numcluster}},
  \code{\link{plot_data_assigned}}
 }

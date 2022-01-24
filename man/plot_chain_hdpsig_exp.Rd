@@ -7,8 +7,7 @@
 plot_chain_hdpsig_exp(hdpsample, chains, legend = TRUE)
 }
 \arguments{
-\item{hdpsample}{A hdpSampleChain or hdpSampleMulti object including output
-from \code{\link{hdp_extract_components}}}
+\item{hdpsample}{A hdpSampleChain or hdpSampleMulti object.}
 
 \item{chains}{A hdpSampleChain or hdpSampleMulti object in the list representation}
 

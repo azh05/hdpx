@@ -54,8 +54,7 @@ plot_dp_comp_exposure(
 )
 }
 \arguments{
-\item{hdpsample}{A hdpSampleChain or hdpSampleMulti object including output
-from \code{\link{hdp_extract_components}}}
+\item{hdpsample}{A hdpSampleChain or hdpSampleMulti.}
 
 \item{legend}{Logical - should a legend be included? (default TRUE)}
 

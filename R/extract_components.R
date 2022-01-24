@@ -265,10 +265,6 @@ extract_components <-  function(x, hc.cutoff = 0.1) {
     }
   }
 
-
-  #dataframe <- dataframe[,stats.dataframe$Freq>1]##exclude spectrum that only extracted in 1 post sample in a chain, too many noisy clusters affect the final extraction
-  #stats.dataframe <- stats.dataframe[stats.dataframe$Freq>1,]
-
   dataframe.normed <- apply(dataframe,2,function(x)x/sum(x))
   cosine.dist.df <- parallelDist::parallelDist(t(dataframe.normed),method = "cosine")
 

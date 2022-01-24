@@ -1,7 +1,6 @@
 #' Plot extracted components
 #'
-#' @param hdpsample A hdpSampleChain or hdpSampleMulti object including output
-#'  from \code{\link{hdp_extract_components}}
+#' @param hdpsample A hdpSampleChain or hdpSampleMulti.
 #' @name plotcomp
 #' @importFrom graphics abline axis barplot matplot mtext par plot points segments text
 #' @importFrom grDevices colorRampPalette
@@ -459,8 +458,7 @@ plot_dp_comp_exposure <- function(hdpsample, input.catalog,ex.signature,
 
 #' Plot hdp signature exposure on each chain
 #'
-#' @param hdpsample A hdpSampleChain or hdpSampleMulti object including output
-#'  from \code{\link{hdp_extract_components}}
+#' @param hdpsample A hdpSampleChain or hdpSampleMulti object.
 #' @param chains A hdpSampleChain or hdpSampleMulti object in the list representation
 #' @importFrom graphics abline axis barplot matplot mtext par plot points segments text
 #' @importFrom grDevices colorRampPalette

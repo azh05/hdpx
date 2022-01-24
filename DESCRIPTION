@@ -50,11 +50,7 @@ Imports:
     reshape2,
     stats,
     beeswarm,
-    Rcpp,
-    RcppArmadillo,
-    flexclust,
-    parallelDist,
-    clue
+    parallelDist
 Suggests:
     testthat,
     RColorBrewer,

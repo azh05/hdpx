@@ -135,7 +135,7 @@ first_merge <- function(ccc, cdc, threshold = 0.99) {
 
 extract_components <-  function(x, hc.cutoff = 0.1) {
   if (class(x)=="hdpSampleChain") {
-    if (verbose)
+    if (FALSE)
       message('Extracting components on single chain. ',
       'A hdpSampleMulti object is recommended, see ?hdp_multi_chain')
     is_multi <- FALSE

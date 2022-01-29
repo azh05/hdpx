@@ -2,18 +2,34 @@
 #'this function is to summarize the credint and mean of cccs and cdcs
 #'and for further diagnostic plotting.
 #'
-#'@param signature The signature for which we want to get the intervals.
+#'@param signature A numerical vector representing the signature for which
+#'  want to find information in \code{ccc_0}.
 #'
-#'@param ccc_0 A list XXXXXXXcontaining clust_categ_counts matrix from hdp.
+#'@param ccc_0 "CCCs" from sample chains. A list of lists of numerical
+#'   matrices. At the top level, one list for each Gibbs sample chain.
+#'   Each element of a top-level list is a numerical matrix, with columns
+#'   for raw clusters and rows being mutation types. The number of
+#'   rows in these matrices should be the length of \code{signature}.
 #'
-#'@param cos.merge cosine similarity cutoff
+#'@param cos.merge The minimum cosine similarity for declaring a match
+#' between \code{signature} and a column of one of the matrices in
+#' in \code{ccc_0}. This should probably be the same as the cuttoff
+#' for separating clusters of mutations after divisive clustering
+#' \code{\link{extract_components}}.
+#'
+#' @return Invisibly, a list with at least the elements
+#'
+#' - \code{ccc_mean}
+#'
+#' - \code{ccc_credint}
 #'
 #'@export
 extract_ccc_from_hdp <- function(signature,
                                  ccc_0,
-                                 cos.merge = 0.90){
+                                 cos.merge = 0.90) {
 
   spectrum.ccc <- data.frame(matrix(nrow=nrow(data.frame(ccc_0[[1]][[1]])),ncol=0))
+
   summary.chain.info <- data.frame(matrix(ncol=3,nrow=0))
 
   for(chain in 1:length(ccc_0)){
@@ -55,13 +71,14 @@ extract_ccc_from_hdp <- function(signature,
     if (min(sum(!is.na(samp)), sum(!is.nan(samp))) %in% c(0,1)) {
       c(NaN, NaN)
     } else {
+      # Get the highest posterior density with a target probability
+      # contenxt of 95%
       round(coda::HPDinterval(samp, 0.95), 4)
     }
   })
 
-
-  return(invisible(list(spectrum.ccc = spectrum.ccc,
-                        ccc_mean = ccc_mean,
-                        ccc_credint = ccc_credint,
-                       summary.chain.info=summary.chain.info)))
+  return(invisible(list(spectrum.ccc       = spectrum.ccc,
+                        ccc_mean           = ccc_mean,
+                        ccc_credint        = ccc_credint,
+                        summary.chain.info = summary.chain.info)))
 }

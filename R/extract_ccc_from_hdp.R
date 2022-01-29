@@ -10,8 +10,8 @@
 #'
 #'@export
 extract_ccc_from_hdp <- function(signature,
-                                     ccc_0,
-                                     cos.merge = 0.90){
+                                 ccc_0,
+                                 cos.merge = 0.90){
 
   spectrum.ccc <- data.frame(matrix(nrow=nrow(data.frame(ccc_0[[1]][[1]])),ncol=0))
   summary.chain.info <- data.frame(matrix(ncol=3,nrow=0))

@@ -67,6 +67,7 @@ Collate:
     'diagnostic_in_extraction.R'
     'dp_activate.R'
     'dp_freeze.R'
+    'extract_ccc_from_hdp.R'
     'extract_components.R'
     'globals.R'
     'hdp.R'

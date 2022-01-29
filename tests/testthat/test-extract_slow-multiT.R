@@ -17,8 +17,9 @@ test_that("extract_components-slow-multiT", {
   load("tdata/output.big.extract.multiT.p4.Rdata",
        envir = reg2)
 
-  ex.com.ret <-
-    extract_components(x = hdp_multi_chain(in_env$chlist), hc.cutoff = 0.10)
+  expect_warning(
+    ex.com.ret <-
+    extract_components(x = hdp_multi_chain(in_env$chlist), hc.cutoff = 0.10))
   ex.com.ret.p1 <- ex.com.ret[c(1:5,7)]
   ex.com.ret.p2 <- ex.com.ret[[6]]@chains[1:6]
   ex.com.ret.p3 <- ex.com.ret[[6]]@chains[7:13]
@@ -38,6 +39,20 @@ test_that("extract_components-slow-multiT", {
   expect_equal(ex.com.ret.p3, reg2$ex.com.ret.p3)
   expect_equal(ex.com.ret.p4, reg2$ex.com.ret.p4)
 
+  # Test based on a simple list hdp sample chains
+  ex.com.ret <-
+    extract_components(sample.chains = in_env$chlist, hc.cutoff = 0.10)
+  ex.com.ret.p1 <- ex.com.ret[c(1:5,7)]
+  ex.com.ret.p2 <- ex.com.ret[[6]]@chains[1:6]
+  ex.com.ret.p3 <- ex.com.ret[[6]]@chains[7:13]
+  ex.com.ret.p4 <- ex.com.ret[[6]]@chains[14:20]
+
+  expect_equal(ex.com.ret.p1, reg2$ex.com.ret.p1)
+  expect_equal(ex.com.ret.p2, reg2$ex.com.ret.p2)
+  expect_equal(ex.com.ret.p3, reg2$ex.com.ret.p3)
+  expect_equal(ex.com.ret.p4, reg2$ex.com.ret.p4)
+
+  # Test interpret_components
   reg3 <- new.env()
   load("tdata/output.big.interpret.multiT.Rdata", envir = reg3)
 

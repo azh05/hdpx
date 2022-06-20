@@ -2,6 +2,8 @@
 #include "R-utils.h"
 #include "malloc_check.h"
 
+int hdpx_debug;
+
 SEXP rReadListElement(const SEXP list, const char *str) {
   SEXP elmt = R_NilValue;
   SEXP names = getAttrib(list, R_NamesSymbol);

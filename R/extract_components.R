@@ -1,26 +1,53 @@
+#' Default arguments for combining "raw clusters" into "aggregated raw clusters".
+#'
+#' @return A list with the following elements:
+#'
+#' * \code{identical.cutoff}
+#'
+#' * \code{nearly.identical.cutoff}
+#'
+#' * \code{clustering.cutoff}
+#'
+#' * \code{discard.singletons}
+#'
+#' @export
+#'
+
+default_merge_raw_cluster_args <- function() {
+  return(list(
+    identical.cutoff        = .99,
+    nearly.identical.cutoff = 0.97,
+    clustering.cutoff       = 0.90,
+    discard.singletons      = TRUE
+  ))
+
+}
+
+
 ########################################################################
-# Merge nearly identical clusters in one posterior chain.
+# Merge nearly identical raw clusters in one posterior chain.
 # This will speed up subsequent hierarchical clustering.
 
 cosmergechain <- function(ccc, cdc, threshold = 0.99){
 
   if (FALSE) {
-  clust_cos <- cosCpp(as.matrix(ccc))
-  clust_label <- c(1:ncol(ccc))
+    # Old code
+    clust_cos <- cosCpp(as.matrix(ccc))
+    clust_label <- c(1:ncol(ccc))
 
-  colnames(ccc) <- colnames(cdc) <- clust_label
+    colnames(ccc) <- colnames(cdc) <- clust_label
 
-  # These are really essentially identical
-  clust_same <- (clust_cos > threshold & lower.tri(clust_cos))
-  same <- which(clust_same, arr.ind=TRUE) # merge these columns
-  if (length(same)>0){
-    for (index in 1:nrow(same)){
-      clust_label[same[index, 1]] <- clust_label[same[index, 2]]
+    # These are really essentially identical
+    clust_same <- (clust_cos > threshold & lower.tri(clust_cos))
+    same <- which(clust_same, arr.ind=TRUE) # merge these columns
+    if (length(same)>0){
+      for (index in 1:nrow(same)){
+        clust_label[same[index, 1]] <- clust_label[same[index, 2]]
+      }
     }
-  }
 
-  ccc_unlist <- merge_cols(as.matrix(ccc),clust_label)
-  cdc_unlist <- merge_cols(as.matrix(cdc),clust_label)
+    ccc_unlist <- merge_cols(as.matrix(ccc),clust_label)
+    cdc_unlist <- merge_cols(as.matrix(cdc),clust_label)
   } else {
     ccc_and_cdc <- first_merge(ccc, cdc, threshold)
     ccc_unlist <- ccc_and_cdc$ccc
@@ -52,7 +79,7 @@ cosmergechain <- function(ccc, cdc, threshold = 0.99){
 
 
 ########################################################################
-# Merge raw clusters (columns) in ccc that are essential identical
+# Merge raw clusters (columns) in ccc that are essentially identical
 # and merge the corresponding columns in cdc.
 
 first_merge <- function(ccc, cdc, threshold = 0.99) {
@@ -81,14 +108,8 @@ first_merge <- function(ccc, cdc, threshold = 0.99) {
 #' code{\link{hdpSampleMulti-class}} object or a list of
 #' \code{\link{hdpSampleChain-class}} objects.
 #'
-#' @param hc.cutoff The height to cut hierarchical clustering tree.
-#'
-#' @param identical.cutoff Raw clusters with cosine similarities
-#'   > this value are merged early.
-#'
-#' @param almost.identical.cutoff Raw clusters with cosine similarities
-#'   > this value are merged a little later, but before the
-#'   divisive hierarchical clustering.
+#' @param merge.raw.cluster.args See
+#'   \code{\link{default_merge_raw_cluster_args}}.
 #'
 #' @return A list with the elements \describe{
 #' \item{components}{Aggregated clusters as a data frame.
@@ -115,7 +136,7 @@ first_merge <- function(ccc, cdc, threshold = 0.99) {
 #'    This can either be a leaf DP, which
 #'    for mutational signatures corresponds
 #'    to a biological sample (for example, a tumor),
-#'    or an parent or ancestor DP.
+#'    or a parent or ancestor DP.
 #'    Each column corresponds to the cluster
 #'    in the corresponding column n \code{components}}
 #'
@@ -140,17 +161,12 @@ first_merge <- function(ccc, cdc, threshold = 0.99) {
 #'
 #' @export
 
-extract_components <-  function(sample.chains = NULL, x = NULL,
-                                hc.cutoff = 0.1,
-                                identical.cutoff = 0.99,
-                                almost.identical.cutoff = 0.97) {
-  if (is.null(sample.chains)) {
-    if (is.null(x)) stop("Please supply a value for argument sample.chains")
-    warning("Argument x for function extract_components is deprecated; ",
-            "use argument sample.chains")
-    sample.chains = x
-  }
-  rm(x)
+extract_components <-  function(sample.chains,
+                                merge.raw.cluster.args =
+                                  default_merge_raw_cluster_args()) {
+                                # hc.cutoff          = 0.1,
+                                # identical.cutoff   = 0.99,
+                                # almost.identical.cutoff = 0.97) {
 
   if (class(sample.chains)=="hdpSampleChain") {
     chlist <- list(sample.chains)
@@ -160,9 +176,12 @@ extract_components <-  function(sample.chains = NULL, x = NULL,
              all(unlist(lapply(sample.chains, class)) == "hdpSampleChain")) {
     chlist <- sample.chains
   } else {
-    stop("x must have class hdpSampleChain or hdpSampleMulti or be a list of hdpSampleChain")
+    stop("sample.chains must have class hdpSampleChain or ",
+         "hdpSampleMulti or sample.chains must be be a list of hdpSampleChain")
   }
   rm(sample.chains)
+
+  identical.cutoff <- merge.raw.cluster.args$identical.cutoff
 
   nch <- length(chlist)
 
@@ -171,10 +190,9 @@ extract_components <-  function(sample.chains = NULL, x = NULL,
   finalstate <- final_hdpState(chlist[[1]])
   nsamp <- sum(sapply(chlist, function(x) hdp_settings(x)$n))
 
-  # number of categories, DPs,data items at each DP, and frozen priors
-  ncat <- numcateg(finalstate) ##number of channel
-  ndp <- numdp(finalstate) ##number of dp
-  numdata <- sapply(dp(finalstate), numdata) #number of mutations in each sample
+  ncat <- numcateg(finalstate)               # number of channels (mutation types)
+  ndp <- numdp(finalstate)                   # number of DPs
+  numdata <- sapply(dp(finalstate), numdata) # number of mutations in each sample
   pseudo <- pseudoDP(finalstate)
   rm(finalstate)
 
@@ -207,7 +225,6 @@ extract_components <-  function(sample.chains = NULL, x = NULL,
       return(x)
     }))
   }
-
 
   for(i in 1:nch) {
     test <- mapply(first_merge,
@@ -255,7 +272,9 @@ extract_components <-  function(sample.chains = NULL, x = NULL,
     clust_cos <- cosCpp(as.matrix(dataframe))
     clust_label <- c(1:ncol(dataframe))
 
-    clust_same <- (clust_cos > almost.identical.cutoff & lower.tri(clust_cos))
+    clust_same <-
+      (clust_cos > merge.raw.cluster.args$nearly.identical.cutoff &
+         lower.tri(clust_cos))
 
     # Again merge more-or-less identical clusters, with the aim of
     # speeding up the hierarchical clustering later
@@ -279,8 +298,10 @@ extract_components <-  function(sample.chains = NULL, x = NULL,
   cosine.dist.hctree.diana <- cluster::diana(x = cosine.dist.df,diss = T)
   cosine.dist.hctree <- stats::as.hclust(cosine.dist.hctree.diana)
 
-  # Find clusters composed of highly similar clusters
-  clusters <- dendextend::cutree(cosine.dist.hctree,  h=hc.cutoff)
+  # Find clusters composed of highly similar aggregated raw clusters
+  clusters <-
+    dendextend::cutree(cosine.dist.hctree,
+                       h = 1 - merge.raw.cluster.args$clustering.cutoff)
   spectrum.df <- merge_cols(as.matrix(dataframe),clusters)
   spectrum.stats <- aggregate(stats.dataframe[,2],by=list(clusters),sum)
   spectrum.cdc <- merge_cols(as.matrix(dp.dataframe),clusters)

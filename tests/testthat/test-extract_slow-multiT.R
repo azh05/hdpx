@@ -19,7 +19,7 @@ test_that("extract_components-slow-multiT", {
 
   expect_warning(
     ex.com.ret <-
-    extract_components(x = hdp_multi_chain(in_env$chlist), hc.cutoff = 0.10))
+    extract_components(sample.chains = hdp_multi_chain(in_env$chlist)))
   ex.com.ret.p1 <- ex.com.ret[c(1:5,7)]
   ex.com.ret.p2 <- ex.com.ret[[6]]@chains[1:6]
   ex.com.ret.p3 <- ex.com.ret[[6]]@chains[7:13]
@@ -41,7 +41,7 @@ test_that("extract_components-slow-multiT", {
 
   # Test based on a simple list hdp sample chains
   ex.com.ret <-
-    extract_components(sample.chains = in_env$chlist, hc.cutoff = 0.10)
+    extract_components(sample.chains = in_env$chlist)
   ex.com.ret.p1 <- ex.com.ret[c(1:5,7)]
   ex.com.ret.p2 <- ex.com.ret[[6]]@chains[1:6]
   ex.com.ret.p3 <- ex.com.ret[[6]]@chains[7:13]

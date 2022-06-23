@@ -12,8 +12,7 @@ test_that("extract_components-slow-multiF", {
   load("tdata/output.multiF-1chain.Rdata", envir = reg2)
 
   ex.com.ret <-
-    extract_components(sample.chains = in_env$chlist[[1]], # Just one element
-                       hc.cutoff = 0.10)
+    extract_components(sample.chains = in_env$chlist[[1]]) # Just one element
   if (FALSE) {
    # To re-generate test data:
    save(ex.com.ret, file = "tdata/output.multiF-1chain.Rdata")

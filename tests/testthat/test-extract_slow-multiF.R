@@ -18,8 +18,7 @@ test_that("extract_components-slow-multiF", {
 
   expect_warning(
     ex.com.ret <-
-      extract_components(x = hdp_multi_chain(in_env$chlist),
-                         hc.cutoff = 0.10)
+      extract_components(sample.chains = hdp_multi_chain(in_env$chlist))
   )
   ex.com.ret.p1 <- ex.com.ret[c(1:5,7)]
   ex.com.ret.p2 <- ex.com.ret[[6]]@chains[1:10]

@@ -4,7 +4,6 @@
 * Created default_merge_raw_cluster_args and simplified associated argument
   lists.
 
-
 # [ 1.0.3 ]
 * Fixed(?) issue with multiple definitions of the "DEBUG" global 
   (renamed to hdpx_debug). Made the declaration in the header "extern" 

@@ -1,3 +1,7 @@
+# [ 1.0.3 ]
+* Fixed(?) issue with multiple definitions of the "DEBUG" global (renamed to hdpx_debug).
+  Made the declaration in the header "extern" and defined he variable in R-utils.h.
+
 # [ 1.0.1 ]
 * Simplified interpret_components and extract_components
 * Renamed extract_components_from_clusters to extract_components

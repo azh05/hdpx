@@ -16,10 +16,9 @@ test_that("extract_components-slow-multiF", {
   load("tdata/output.big.extract.multiF.p3.Rdata",
        envir = reg2)
 
-  expect_warning(
     ex.com.ret <-
       extract_components(sample.chains = hdp_multi_chain(in_env$chlist))
-  )
+
   ex.com.ret.p1 <- ex.com.ret[c(1:5,7)]
   ex.com.ret.p2 <- ex.com.ret[[6]]@chains[1:10]
   ex.com.ret.p3 <- ex.com.ret[[6]]@chains[11:20]

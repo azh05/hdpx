@@ -22,7 +22,6 @@
 #' dp(my_hdp)
 
 hdp_setdata <- function(hdp, dpindex, data){
-
   #input checks
   if (class(hdp) != "hdpState") stop("hdp must have class hdpState")
   if (!validObject(hdp)) stop("input hdp is not a valid hdpState object")
@@ -33,6 +32,11 @@ hdp_setdata <- function(hdp, dpindex, data){
     stop("dpindex must be positive integers no greater than
          numdp(hdp) with no duplicates")
   }
+
+  if(is.null(ncol(data))) {
+    data <- matrix(data, ncol = length(data))
+  }
+
   if (!(is.matrix(data) || is.data.frame(data))) {
     stop("data must be data.frame or matrix")
   }
@@ -45,6 +49,9 @@ hdp_setdata <- function(hdp, dpindex, data){
   # convert data to a list of data item values (not category counts)
   datass <- apply(data, 1, function(x) rep(1:ncol(data), x))
 
+  if(nrow(data) == 1) {
+    datass <- list(c(datass))
+  }
 
   HELDOUT <- 0L
 
